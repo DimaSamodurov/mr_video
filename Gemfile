@@ -13,7 +13,8 @@ gemspec
 # To use debugger
 # gem 'debugger'
 
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 5.2'
+gem 'sprockets', '~> 3.7'
 gem 'sqlite3', :platforms => :ruby
 
 group :test do
@@ -24,4 +25,8 @@ group :test do
   gem 'rspec-mocks'
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 3.1.3'
+end
+
+group :development do
+  gem 'pry'
 end
