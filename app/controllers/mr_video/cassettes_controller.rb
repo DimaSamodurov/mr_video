@@ -7,6 +7,21 @@ module MrVideo
 
     def show
       @cassette = Cassette.find(params[:id])
+
+      @row_data = @cassette.episodes.map do |episode|
+        uri = URI(episode.url) rescue OpenStruct.new
+        {
+          id: episode.id,
+          url: episode.url,
+          host: uri.host,
+          path: helpers.link_to(uri.path, cassette_episode_path(@cassette, episode, fix_relative_links: true), html_options = { target: '_blank' }),
+          query: uri.query,
+          content_link: helpers.link_to(uri.path, cassette_episode_path(@cassette, episode, fix_relative_links: true), html_options = { target: '_blank' }),
+          edit_path: edit_cassette_episode_path(@cassette, episode)
+        }
+      end
+
+      render 'mr_video/cassettes/show_ag'
     end
 
     def destroy

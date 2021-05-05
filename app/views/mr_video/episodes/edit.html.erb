@@ -1,0 +1,26 @@
+<% content_for :head do %>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.4.1/jsoneditor.css" rel="stylesheet" type="text/css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.4.1/jsoneditor.min.js"></script>
+<% end %>
+
+<h1>Editing response for episode...</h1>
+
+<div id="jsoneditor" />
+
+<%= form_with do |f| %>
+  <%= text_area_tag :content, @episode.content, class: "invisible"  %>
+<% end %>
+
+<script>
+  // create the editor
+  const container = document.getElementById("jsoneditor")
+  const options = {}
+  const editor = new JSONEditor(container, options)
+
+  // set json
+  const initialJson = JSON.parse(document.getElementById("content").value);
+  editor.set(initialJson)
+
+  // get json
+  const updatedJson = editor.get()
+</script>

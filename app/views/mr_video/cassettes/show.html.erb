@@ -7,7 +7,9 @@
       <thead>
         <tr>
           <th scope="col" style="width: 4em" data-searchable="false" data-orderable="false" class="text-right">#</th>
-          <th scope="col" style="width: 60%">Url</th>
+          <th scope="col" style="width: 60%">Host</th>
+          <th scope="col" style="width: 60%">Path</th>
+          <th scope="col" style="width: 60%">Query</th>
           <th scope="col" style="width: 6em" data-searchable="false">Method</th>
           <th scope="col" style="width: 20%" data-searchable="false">Content Type</th>
           <th scope="col" style="width: 20%" data-searchable="false">Recorded</th>
@@ -16,13 +18,17 @@
       </thead>
       <tbody>
         <% @cassette.episodes.each do |episode| %>
+          <% uri = URI(episode.url) %>
           <tr id="episode_<%= episode.id %>_row">
             <th scope="row" class="text-right"></th>
-            <td title="<%= episode.url %>"><%= link_to(episode.url, cassette_episode_path(@cassette, episode, fix_relative_links: true), html_options = { target: '_blank' }) %></td>
+            <td title="<%= uri.host %>"><%= uri.host %></td>
+            <td title="<%= episode.url %>"><%= link_to(uri.path, cassette_episode_path(@cassette, episode, fix_relative_links: true), html_options = { target: '_blank' }) %></td>
+            <td title="<%= uri.query %>"><%= uri.query %></td>
             <td><code><%= episode.request_method.upcase %></code></td>
             <td title="<%= episode.content_type %>"><code><%= episode.content_type %></code></td>
             <td class="small text-muted" title="<%= episode.recorded_at %>"><%= time_ago_in_words(episode.recorded_at) %> ago</td>
             <td class="text-center">
+              <%= link_to('Edit', edit_cassette_episode_path(@cassette, episode), class: 'btn btn-sm') %>
               <%= link_to('Delete', cassette_episode_path(@cassette, episode), method: :delete, confirm: "Are you sure you want to delete the \"#{episode.url}\" episode?", 'data-severity' => 'danger', remote: true, class: 'btn btn-outline-danger btn-sm') %>
             </td>
           </tr>
