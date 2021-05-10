@@ -9,18 +9,20 @@
 
 <%= form_with do |f| %>
   <%= text_area_tag :content, @episode.content, class: "invisible"  %>
+  <%= submit_tag 'Save', data: { disable_with: "Please wait..." }, onclick: "updateJson()" %>
 <% end %>
 
-<script>
+<script type="application/javascript">
   // create the editor
-  const container = document.getElementById("jsoneditor")
-  const options = {}
-  const editor = new JSONEditor(container, options)
+  const container = document.getElementById("jsoneditor");
+  const options = {};
+  const editor = new JSONEditor(container, options);
 
   // set json
   const initialJson = JSON.parse(document.getElementById("content").value);
   editor.set(initialJson)
 
-  // get json
-  const updatedJson = editor.get()
+  function updateJson(){
+    document.getElementById("content").value = JSON.stringify(editor.get());
+  }
 </script>

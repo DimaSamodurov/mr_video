@@ -4,22 +4,33 @@
     <h1 class="text-break"><%= @cassette.name %></h1>
     <h2>Episodes <small class="text-muted"><%= @cassette.episodes.count %></small></h2>
 
-    <div id="requests-table" class="ag-theme-alpine" style="height: 400px; width:auto;" />
+    <div class="font-italic text-right text-secondary">Tips: hover over the column header to filter.</div>
+    <div id="requests-table" class="ag-theme-alpine" style="height: 400px; width:auto;"/>
 
     <script type="text/javascript" charset="utf-8">
       // specify the columns
       const columnDefs = [
-        { field: "host", width: 370, sortable: true, filter: true, resizable: true },
-        { field: "edit", width: 70,
-          cellRenderer: function(params){
-            const episode = params.data;
-            return `<a href=${episode.edit_path} target="_blank">edit</a>` }
+        {
+          field: "host", width: 370, sortable: true, filter: true, resizable: true
         },
-        { field: "path", width: 800, sortable: true, filter: true, resizable: true,
-          cellRenderer: function(params){
+        {
+          field: "url", headerName: 'Path and query',
+          minWidth: 600, flex: 1, sortable: true, filter: true, resizable: true, wrapText: true, autoHeight: true,
+          cellRenderer: function (params) {
             const episode = params.data;
-            return `<a href=${episode.url} target="_blank">${episode.path}</a>` }},
-        { field: "query", width: 300, sortable: true, filter: true, resizable: true  }
+            return `<div style='line-height: 1.7rem; margin-top: 0.5rem; margin-bottom: 0.5rem;'>
+                    <div class=''>${episode.path}</div>
+                    <div class='text-secondary'>${episode.query ? '?' + episode.query : ''}</div>
+                    </div>`
+          }
+        },
+        {
+          field: "actions", headerName: '', width: 70,
+          cellRenderer: function (params) {
+            const episode = params.data;
+            return `<a href=${episode.edit_path} target="_blank">edit</a>`
+          }
+        }
       ];
 
       // specify the data
@@ -28,7 +39,9 @@
       // let the grid know which columns and what data to use
       const gridOptions = {
         columnDefs: columnDefs,
-        rowData: rowData
+        rowData: rowData,
+        enableCellTextSelection: true,
+        ensureDomOrder: true
       };
 
       // lookup the container we want the Grid to use

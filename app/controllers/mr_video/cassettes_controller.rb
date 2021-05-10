@@ -14,7 +14,7 @@ module MrVideo
           id: episode.id,
           url: episode.url,
           host: uri.host,
-          path: helpers.link_to(uri.path, cassette_episode_path(@cassette, episode, fix_relative_links: true), html_options = { target: '_blank' }),
+          path: uri.path,
           query: uri.query,
           content_link: helpers.link_to(uri.path, cassette_episode_path(@cassette, episode, fix_relative_links: true), html_options = { target: '_blank' }),
           edit_path: edit_cassette_episode_path(@cassette, episode)
