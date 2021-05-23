@@ -16,8 +16,10 @@ module MrVideo
           host: uri.host,
           path: uri.path,
           query: uri.query,
+          status: episode.response.dig('status', 'code'),
           content_link: helpers.link_to(uri.path, cassette_episode_path(@cassette, episode, fix_relative_links: true), html_options = { target: '_blank' }),
-          edit_path: edit_cassette_episode_path(@cassette, episode)
+          edit_episode_path: edit_cassette_episode_path(@cassette, episode),
+          episode_path: cassette_episode_path(@cassette, episode)
         }
       end
 

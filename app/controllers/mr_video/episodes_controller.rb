@@ -17,6 +17,7 @@ module MrVideo
       cassette = Cassette.find(params[:cassette_id])
       @episode = cassette.find_episode_by_id(params[:id])
       @episode.destroy
+      render json: {}
     end
 
   end # CassettesController class

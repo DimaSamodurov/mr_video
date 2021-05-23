@@ -25,10 +25,16 @@
           }
         },
         {
-          field: "actions", headerName: '', width: 70,
+          field: 'status', width: 95, sortable: true, filter: true, resizable: true
+        },
+        {
+          field: "actions", headerName: '', width: 75,
           cellRenderer: function (params) {
             const episode = params.data;
-            return `<a href=${episode.edit_path} target="_blank">edit</a>`
+            return `<div style='line-height: 1.3rem; margin-top: 0.5rem; margin-bottom: 0.5rem;'>
+                    <div><a href=${episode.edit_episode_path} target="_blank">edit</a></div>
+                    <div><a href=${episode.episode_path} data-method="delete" data-confirm="Delete episode?" data-remote="true">delete</a></div>
+                    </div>`
           }
         }
       ];

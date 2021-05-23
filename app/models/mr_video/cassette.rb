@@ -77,8 +77,6 @@ module MrVideo
       new(cassette_path)
     end
 
-    private
-
     # Properties:
 
     def episodes_grouped_by_id

@@ -37,7 +37,7 @@ module MrVideo
     end
 
     def destroy
-      cassette.send(:destroy_episode, self)
+      cassette.destroy_episode(self)
     end
 
     def inspect
@@ -47,8 +47,6 @@ module MrVideo
     def to_param
       id.to_s
     end
-
-    private
 
     def request
       http_interaction['request']
