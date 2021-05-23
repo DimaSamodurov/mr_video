@@ -10,6 +10,8 @@
  *
  *= require_tree ./bootstrap
  *= require_tree ./dataTables
+ *= require 'ag-grid'
+ *= require 'ag-theme-alpine'
  *= require_self
  */
 

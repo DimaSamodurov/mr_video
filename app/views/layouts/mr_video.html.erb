@@ -4,12 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= MrVideo::NAME %><%= ' | ' + yield(:title) if content_for?(:title) %></title>
-
-    <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
-    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css">
-
+    <title><%= MrVideo::NAME %><%= ' | ' + yield(:title) if content_for?(:title) %></title>config.assets.debug
 
     <%= stylesheet_link_tag 'mr_video/application', media: 'all' %>
     <%= javascript_include_tag 'mr_video/application' %>

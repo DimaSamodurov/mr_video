@@ -13,6 +13,7 @@
 //= require_tree ./jquery
 //= require_tree ./bootstrap
 //= require_tree ./dataTables
+//= require 'ag-grid-community.min.noStyle'
 
 $(document).ready(function() {
   var t = $(".table").DataTable({
