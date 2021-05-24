@@ -13,6 +13,13 @@ module MrVideo
       @episode = Episodes::ShowPresenter.new(self)
     end
 
+    def update
+      cassette = Cassette.find(params[:cassette_id])
+      @episode = cassette.find_episode_by_id(params[:id])
+      @episode.update(body: params[:content])
+      redirect_to action: 'edit'
+    end
+
     def destroy
       cassette = Cassette.find(params[:cassette_id])
       @episode = cassette.find_episode_by_id(params[:id])

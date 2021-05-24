@@ -40,6 +40,11 @@ module MrVideo
       cassette.destroy_episode(self)
     end
 
+    def update(body:)
+      response['body']['string'] = body
+      cassette.save!
+    end
+
     def inspect
       to_s
     end

@@ -105,7 +105,7 @@ module MrVideo
     end
 
     def destroy_episode(episode)
-      http_interactions.delete(episode.send(:http_interaction))
+      http_interactions.delete(episode.http_interaction)
       save!
     end
 

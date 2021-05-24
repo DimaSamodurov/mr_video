@@ -5,11 +5,15 @@
 
 <h1>Editing response for episode...</h1>
 
-<div id="jsoneditor" />
+<div class="row">
+  <div id="jsoneditor"/>
+</div>
 
-<%= form_with do |f| %>
-  <%= text_area_tag :content, @episode.content, class: "invisible"  %>
-  <%= submit_tag 'Save', data: { disable_with: "Please wait..." }, onclick: "updateJson()" %>
+<%= form_with url: cassette_episode_path, method: :put do |f| %>
+  <%= text_area_tag :content, @episode.content, class: "invisible" %>
+  <div class="row">
+    <%= submit_tag 'Save', data: { disable_with: "Please wait..." }, onclick: "updateJson()" %>
+  </div>
 <% end %>
 
 <script type="application/javascript">
@@ -22,7 +26,7 @@
   const initialJson = JSON.parse(document.getElementById("content").value);
   editor.set(initialJson)
 
-  function updateJson(){
+  function updateJson() {
     document.getElementById("content").value = JSON.stringify(editor.get());
   }
 </script>

@@ -32,5 +32,5 @@ Dummy::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = false  # When false, assets will behave like they would in production
+  config.assets.debug = true  # When false, assets will behave like they would in production
 end
