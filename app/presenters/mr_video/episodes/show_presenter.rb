@@ -1,52 +1,46 @@
 module MrVideo
-
   module Episodes
-
     class ShowPresenter
 
-      def initialize(context)
-        @context = context
+      attr_reader :id, :cassette_id, :fix_relative_links
+
+      extend Forwardable
+      # Delegate Episode.instance_methods(false) to episode, except :cassette, :content, :id, :update, :destroy
+      def_delegators :episode, :content_type, :headers,
+                     :http_interaction, :recorded_at, :request, :request_method,
+                     :response, :uri, :url, :website_url
+
+      def initialize(cassette_id:, id:, fix_relative_links: false)
+        @cassette_id = cassette_id
+        @id = id
+        @fix_relative_links = fix_relative_links
       end
 
       def content
-        if fix_relative_links?
+        if fix_relative_links
           content_with_relative_links_fixed
         else
-          raw_content
+          episode.content
         end
       end
 
-      def content_type
-        episode.content_type
+      def status
+        episode.response.dig('status', 'code')
       end
-
-      private
 
       def content_with_relative_links_fixed
-        content = raw_content
+        fixed_content = episode.content
         [
-        /href=["']([^'" >]+)["']/,
-        /src=["']([^'" >]+)["']/,
-        /@import url\(([^'" >]+)\)/     
+          /href=["']([^'" >]+)["']/,
+          /src=["']([^'" >]+)["']/,
+          /@import url\(([^'" >]+)\)/
         ].each do |pattern|
-          content.gsub!(pattern) do |match|
+          fixed_content.gsub!(pattern) do |match|
             url = $1
-            match.gsub(url, URI.join(base_url, url).to_s)
+            match.gsub(url, URI.join(website_url, url).to_s)
           end
         end
-        content
-      end
-
-      def base_url
-        episode.website_url
-      end
-
-      def raw_content
-        episode.content
-      end
-
-      def fix_relative_links?
-        params[:fix_relative_links] != 'false'
+        fixed_content
       end
 
       def episode
@@ -56,25 +50,6 @@ module MrVideo
       def cassette
         @cassette ||= Cassette.find(cassette_id)
       end
-
-      def cassette_id
-        params[:cassette_id]
-      end
-
-      def id
-        params[:id]
-      end
-
-      def params
-        context.params
-      end
-
-      def context
-        @context
-      end
-
-    end # ShowPresenter class
-
-  end # Episodes module
-
-end # MrVideo module
+    end
+  end
+end

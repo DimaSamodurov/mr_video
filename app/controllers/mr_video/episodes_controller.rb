@@ -1,16 +1,13 @@
 module MrVideo
-
   class EpisodesController < MrVideoController
 
     def show
-      show_presenter = Episodes::ShowPresenter.new(self)
-
-      # TODO: Add method for sending decompressed content
-      send_data show_presenter.content, type: show_presenter.content_type, disposition: 'inline'
+      send_data episode_show_presenter.content,
+                type: episode_show_presenter.content_type, disposition: 'inline'
     end
 
     def edit
-      @episode = Episodes::ShowPresenter.new(self)
+      @episode_presenter = episode_show_presenter
     end
 
     def update
@@ -27,6 +24,11 @@ module MrVideo
       render json: {}
     end
 
-  end # CassettesController class
+    private
 
-end # MrVideo module
+    def episode_show_presenter
+      episode_params = params.permit(:cassette_id, :id, :fix_relative_links).to_h.symbolize_keys
+      @episode_show_presenter ||= Episodes::ShowPresenter.new(**episode_params)
+    end
+  end
+end
