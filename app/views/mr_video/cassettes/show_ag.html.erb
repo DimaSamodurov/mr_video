@@ -12,10 +12,13 @@
       // specify the columns
       const columnDefs = [
         {
+          field: 'status', width: 95, sortable: true, filter: true, resizable: true
+        },
+        {
           field: "host", width: 370, sortable: true, filter: true, resizable: true
         },
         {
-          field: "url", headerName: 'Path and query',
+          field: "file",
           minWidth: 600, flex: 1, sortable: true, filter: true, resizable: true, wrapText: true, autoHeight: true,
           cellRenderer: function (params) {
             const episode = params.data;
@@ -26,15 +29,23 @@
           }
         },
         {
-          field: 'status', width: 95, sortable: true, filter: true, resizable: true
+          field: "content_size", headerName: 'Size', width: 100, sortable: true, resizable: true,
+          cellRenderer: function (params) {
+            const episode = params.data;
+            return episode.content_pretty_size;
+          }
         },
         {
           field: "actions", headerName: '', width: 75,
           cellRenderer: function (params) {
             const episode = params.data;
             return `<div style='line-height: 1.3rem; margin-top: 0.5rem; margin-bottom: 0.5rem;'>
-                    <div><a href=${episode.edit_episode_path} target="_blank">edit</a></div>
-                    <div><a href=${episode.episode_path} data-method="delete" data-confirm="Delete episode?" data-remote="true">delete</a></div>
+                      <span><a href=${episode.edit_episode_path} target="_blank" title="Edit">
+                            <%= render partial: 'icons/pencil' %></a></span>
+                      &nbsp;
+                      <span><a href=${episode.episode_path} data-method="delete" title="Delete"
+                               data-confirm="Delete episode?" data-remote="true">
+                            <%= render partial: 'icons/trash' %></a></span>
                     </div>`
           }
         }
