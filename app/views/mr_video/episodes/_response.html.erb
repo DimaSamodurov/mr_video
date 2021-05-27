@@ -1,34 +1,31 @@
-<div class="">
-  <div id="content_jsoneditor" class="jsoneditor"/>
+<div class="row">
+  <div class="col-10">
+    <div id="content_jsoneditor" class="jsoneditor"></div>
+  </div>
+
+  <div class="col-2">
+    <%= form_with url: cassette_episode_path, method: :put do |f| %>
+      <%= text_area_tag :content, @episode_presenter.content, class: "d-none" %>
+      <div><%= submit_tag 'Save', data: { disable_with: "Please wait..." }, onclick: "updateFormContent()" %></div>
+    <% end %>
+  </div>
 </div>
 
-<%= form_with url: cassette_episode_path, method: :put do |f| %>
-  <%= text_area_tag :content, @episode_presenter.content, class: "d-none" %>
-  <div><%= submit_tag 'Save', data: { disable_with: "Please wait..." }, onclick: "updateFormContent()" %></div>
-<% end %>
-
 <% content_for :scripts do %>
-
   <style type="text/css">
       .jsoneditor {
-          height: 350px;
+          height: 450px;
       }
   </style>
 
   <script type="application/javascript">
-    const editorOptions = {
-      mode: 'code',
-      modes: ['code', 'tree']
-    }
-    // create the editor
     const contentEditor = new JSONEditor(
       document.getElementById("content_jsoneditor"),
-      editorOptions,
+      {mode: 'code', modes: ['code', 'tree']},
       JSON.parse(document.getElementById("content").value));
 
     function updateFormContent() {
       document.getElementById("content").value = JSON.stringify(contentEditor.get());
     }
   </script>
-
 <% end %>

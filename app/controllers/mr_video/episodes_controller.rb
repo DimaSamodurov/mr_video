@@ -14,6 +14,7 @@ module MrVideo
       cassette = Cassette.find(params[:cassette_id])
       @episode = cassette.find_episode_by_id(params[:id])
       @episode.update(body: params[:content])
+      flash[:success] = "Episode is Updated!"
       redirect_to action: 'edit'
     end
 

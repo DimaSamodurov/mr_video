@@ -1,1 +1,26 @@
-<%= @episode_presenter.headers %>
+<div class="row">
+  <div class="col-10">
+    <div id="headers_jsoneditor" class="jsoneditor"></div>
+  </div>
+
+  <div class="col-2">
+    <%= form_with url: cassette_episode_path, method: :put do |f| %>
+      <%= text_area_tag :headers, @episode_presenter.headers.to_json, class: "d-none" %>
+    <% end %>
+  </div>
+</div>
+
+<% content_for :scripts do %>
+
+  <script type="application/javascript">
+
+    const headersEditor = new JSONEditor(
+      document.getElementById("headers_jsoneditor"),
+      { mode: 'code', modes: ['code', 'tree']},
+      JSON.parse(document.getElementById("headers").value));
+
+    function updateFormHeaders() {
+      document.getElementById("headers").value = JSON.stringify(headersEditor.get());
+    }
+  </script>
+<% end %>

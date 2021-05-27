@@ -20,9 +20,13 @@
         <%= link_to('Cassettes', root_path, class: 'nav-item nav-link') %>
       </div>
     </nav>
+
+    <%= render partial: 'layouts/flashes', flash: flash %>
+
     <div class="container-fluid" >
       <%= yield %>
     </div>
+
     <div class="navbar navbar-dark bg-dark fixed-bottom">
       <span class="navbar-text">Mr. Video v<%= MrVideo::VERSION %></span>
       <ul class="nav navbar-nav">
@@ -32,6 +36,7 @@
       </ul>
       <span class="navbar-text">Cassette Library Dir: <%= MrVideo.configuration.cassette_library_dir %></span>
     </div>
-  <%= yield :scripts %>
+
+    <%= yield :scripts %>
   </body>
 </html>
