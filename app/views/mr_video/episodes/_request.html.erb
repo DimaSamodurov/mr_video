@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-10">
+    <div id="request_jsoneditor" class="jsoneditor"></div>
+  </div>
+
+  <div class="col-2">
+    <%= form_with url: cassette_episode_path, method: :put do |f| %>
+      <%= text_area_tag :request, @episode_presenter.request.to_json, class: "d-none" %>
+    <% end %>
+  </div>
+</div>
+
+<% content_for :scripts do %>
+
+  <script type="application/javascript">
+
+    const requestEditor = new JSONEditor(
+      document.getElementById("request_jsoneditor"),
+      { mode: 'code', modes: ['code', 'tree']},
+      JSON.parse(document.getElementById("request").value));
+
+    function updateFormrequest() {
+      document.getElementById("request").value = JSON.stringify(requestEditor.get());
+    }
+  </script>
+<% end %>

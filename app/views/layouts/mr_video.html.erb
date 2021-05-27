@@ -14,28 +14,15 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-dark fixed-top" role="navigation">
-      <a class="navbar-brand" href="<%= root_path %>">Mr. Video</a>
-      <div class="navbar-nav mr-auto">
-        <%= link_to('Cassettes', root_path, class: 'nav-item nav-link') %>
-      </div>
-    </nav>
-
+    <%= render partial: 'layouts/top_navbar' %>
+    <%= render partial: 'layouts/breadcrumbs' %>
     <%= render partial: 'layouts/flashes', flash: flash %>
 
     <div class="container-fluid" >
       <%= yield %>
     </div>
 
-    <div class="navbar navbar-dark bg-dark fixed-bottom">
-      <span class="navbar-text">Mr. Video v<%= MrVideo::VERSION %></span>
-      <ul class="nav navbar-nav">
-        <li>
-          <%= link_to('GitHub', MrVideo::URL, target: '_blank', class: 'nav-link') %>
-        </li>
-      </ul>
-      <span class="navbar-text">Cassette Library Dir: <%= MrVideo.configuration.cassette_library_dir %></span>
-    </div>
+    <%= render partial: 'layouts/footer' %>
 
     <%= yield :scripts %>
   </body>

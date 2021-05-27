@@ -1,0 +1,9 @@
+<div class="navbar navbar-dark bg-dark fixed-bottom">
+  <span class="navbar-text">Mr. Video v<%= MrVideo::VERSION %></span>
+  <ul class="nav navbar-nav">
+    <li>
+      <%= link_to('GitHub', MrVideo::URL, target: '_blank', class: 'nav-link') %>
+    </li>
+  </ul>
+  <span class="navbar-text">Cassette Library Dir: <%= MrVideo.configuration.cassette_library_dir %></span>
+</div>

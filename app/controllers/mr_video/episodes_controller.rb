@@ -7,6 +7,7 @@ module MrVideo
     end
 
     def edit
+      @cassette = Cassette.find(params[:cassette_id])
       @episode_presenter = episode_show_presenter
     end
 
@@ -28,8 +29,9 @@ module MrVideo
     private
 
     def episode_show_presenter
-      episode_params = params.permit(:cassette_id, :id, :fix_relative_links).to_h.symbolize_keys
-      @episode_show_presenter ||= Episodes::ShowPresenter.new(**episode_params)
+      @episode_show_presenter ||=
+        (episode_params = params.permit(:cassette_id, :id, :fix_relative_links).to_h.symbolize_keys) &&
+        Episodes::ShowPresenter.new(**episode_params)
     end
   end
 end

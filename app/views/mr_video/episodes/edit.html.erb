@@ -1,24 +1,37 @@
 <% content_for :head do %>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.4.1/jsoneditor.css" rel="stylesheet" type="text/css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.4.1/jsoneditor.min.js"></script>
+
+  <style type="text/css">
+      .jsoneditor {
+          height: 400px;
+      }
+  </style>
 <% end %>
 
-<h5> <%= @episode_presenter.uri.path %></h5>
-<div class="hint"><%= @episode_presenter.url %></div>
+<div class="hint">
+  <%= @episode_presenter.status %>
+  <%= @episode_presenter.url %>
+</div>
+
 <br>
+
 <div class="row">
   <div class="col-2">
-    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-      <a class="nav-link active" id="v-pills-home-tab"
-         data-toggle="pill" href="#v-pills-response">Response</a>
-      <a class="nav-link" id="v-pills-profile-tab"
-         data-toggle="pill" href="#v-pills-headers">Headers</a>
+    <div class="nav flex-column nav-pills" id="v-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link active" id="v-home-tab"
+         data-toggle="pill" href="#v-response">Response body</a>
+      <a class="nav-link" id="v-headers-tab"
+         data-toggle="pill" href="#v-headers">Response headers</a>
+      <a class="nav-link" id="v-request-tab"
+         data-toggle="pill" href="#v-request">Request</a>
     </div>
   </div>
   <div class="col-10">
-    <div class="tab-content" id="v-pills-tabContent">
-      <div class="tab-pane fade active show" id="v-pills-response"><%= render partial: 'response' %></div>
-      <div class="tab-pane fade" id="v-pills-headers"><%= render partial: 'headers' %></div>
+    <div class="tab-content" id="v-tabContent">
+      <div class="tab-pane fade active show" id="v-response"><%= render partial: 'response' %></div>
+      <div class="tab-pane fade" id="v-headers"><%= render partial: 'headers' %></div>
+      <div class="tab-pane fade" id="v-request"><%= render partial: 'request' %></div>
     </div>
   </div>
 </div>

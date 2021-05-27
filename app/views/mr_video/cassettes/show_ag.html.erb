@@ -2,8 +2,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    <h1 class="text-break"><%= @cassette.name %></h1>
-    <h2>Episodes <small class="text-muted"><%= @cassette.episodes.count %></small></h2>
+    <h5>Total <small class="text-muted"><%= @cassette.episodes.count %></small> episode(s)</h5>
 
     <div class="font-italic text-right text-secondary">Tips: hover over the column header to filter.</div>
     <div id="requests-table" class="ag-theme-alpine" style="height: 400px; width:auto;"/>

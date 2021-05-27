@@ -1,0 +1,13 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to('Cassettes', root_path, class: 'breadcrumb-item') %></li>
+
+    <% if @cassette %>
+      <li class="breadcrumb-item"><%= link_to(@cassette.name, cassette_path(@cassette), class: 'breadcrumb-item') %></li>
+    <% end %>
+
+    <% if @episode_presenter %>
+      <li class="breadcrumb-item active"><%= link_to(@episode_presenter.uri.path, "", class: 'breadcrumb-item') %></li>
+    <% end %>
+  </ol>
+</nav>
