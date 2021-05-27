@@ -3,8 +3,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.4.1/jsoneditor.min.js"></script>
 
   <style type="text/css">
-      .jsoneditor {
-          height: 400px;
+      html, body {
+          height: 100%;
       }
   </style>
 <% end %>
@@ -16,7 +16,7 @@
 
 <br>
 
-<div class="row">
+<div class="row" style="height: 100%;">
   <div class="col-2">
     <div class="nav flex-column nav-pills" id="v-tab" role="tablist" aria-orientation="vertical">
       <a class="nav-link active" id="v-home-tab"
@@ -28,10 +28,10 @@
     </div>
   </div>
   <div class="col-10">
-    <div class="tab-content" id="v-tabContent">
-      <div class="tab-pane fade active show" id="v-response"><%= render partial: 'response' %></div>
-      <div class="tab-pane fade" id="v-headers"><%= render partial: 'headers' %></div>
-      <div class="tab-pane fade" id="v-request"><%= render partial: 'request' %></div>
+    <div class="tab-content" id="v-tabContent" style="height: 100%;">
+      <div class="tab-pane fade active show" id="v-response" style="height: 100%;"><%= render partial: 'response' %></div>
+      <div class="tab-pane fade" id="v-headers" style="height: 100%;"><%= render partial: 'headers' %></div>
+      <div class="tab-pane fade" id="v-request" style="height: 100%;"><%= render partial: 'request' %></div>
     </div>
   </div>
 </div>

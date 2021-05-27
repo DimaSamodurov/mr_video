@@ -1,11 +1,20 @@
 <% content_for(:title) { "Cassettes | #{@cassette.name}" } %>
+<% content_for :head do %>
+  <style type="text/css">
+      html, body {
+          height: 100%;
+      }
+  </style>
+<% end %>
 
-<div class="row">
+
+<div class="row" style="height: 100%;">
   <div class="col-md-12">
     <h5>Total <small class="text-muted"><%= @cassette.episodes.count %></small> episode(s)</h5>
 
     <div class="font-italic text-right text-secondary">Tips: hover over the column header to filter.</div>
-    <div id="requests-table" class="ag-theme-alpine" style="height: 400px; width:auto;"/>
+
+    <div id="requests-table" class="ag-theme-alpine" style="min-height: 200px; height: 100%; width:bauto;"/>
 
     <script type="text/javascript" charset="utf-8">
       // specify the columns
