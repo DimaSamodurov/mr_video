@@ -1,9 +1,9 @@
 <div class="row" style="height: 100%;">
-  <div class="col-10" style="height: 100%;">
+  <div class="col-11" style="height: 100%;">
     <div id="headers_jsoneditor" class="jsoneditor"></div>
   </div>
 
-  <div class="col-2">
+  <div class="col-1">
     <%= form_with url: cassette_episode_path, method: :put do |f| %>
       <%= text_area_tag :headers, @episode_presenter.headers.to_json, class: "d-none" %>
     <% end %>

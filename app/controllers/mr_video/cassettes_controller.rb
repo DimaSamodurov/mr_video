@@ -15,6 +15,7 @@ module MrVideo
           id: episode.id,
           url: episode.url,
           file: episode.file,
+          method: episode.request_method,
           host: episode.uri.host,
           path: episode.uri.path,
           query: episode.uri.query,

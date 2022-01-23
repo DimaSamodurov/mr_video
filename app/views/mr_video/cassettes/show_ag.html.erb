@@ -1,6 +1,6 @@
 <% content_for(:title) { "Cassettes | #{@cassette.name}" } %>
 <% content_for :head do %>
-  <style type="text/css">
+  <style>
       html, body {
           height: 100%;
       }
@@ -14,7 +14,7 @@
 
     <div class="font-italic text-right text-secondary">Tips: hover over the column header to filter.</div>
 
-    <div id="requests-table" class="ag-theme-alpine" style="min-height: 200px; height: 100%; width:bauto;"/>
+    <div id="requests-table" class="ag-theme-alpine" style="min-height: 200px; height: 85%; width:bauto;"/>
 
     <script type="text/javascript" charset="utf-8">
       // specify the columns
@@ -23,7 +23,10 @@
           field: 'status', width: 95, sortable: true, filter: true, resizable: true
         },
         {
-          field: "host", width: 370, sortable: true, filter: true, resizable: true
+          field: "method", width: 95, sortable: true, filter: true, resizable: true
+        },
+        {
+          field: "host",  sortable: true, filter: true, resizable: true
         },
         {
           field: "file",

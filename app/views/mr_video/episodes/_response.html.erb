@@ -1,12 +1,17 @@
 <div class="row" style="height: 100%;">
-  <div class="col-10" style="height: 100%;">
+  <div class="col-11" style="height: 100%;">
     <div id="content_jsoneditor" class="jsoneditor"></div>
   </div>
 
-  <div class="col-2">
+  <div class="col-1">
     <%= form_with url: cassette_episode_path, method: :put do |f| %>
       <%= text_area_tag :content, @episode_presenter.content, class: "d-none" %>
-      <div><%= submit_tag 'Save', data: { disable_with: "Please wait..." }, onclick: "updateFormContent()" %></div>
+      <div>
+        <%= submit_tag 'Save',
+          data: { disable_with: "Please wait..." },
+          onclick: "updateFormContent()",
+          class: "btn btn-outline-primary btn-sm" %>
+      </div>
     <% end %>
   </div>
 </div>

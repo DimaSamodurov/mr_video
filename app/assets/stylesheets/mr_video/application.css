@@ -15,11 +15,6 @@
  *= require_self
  */
 
-body {
-  padding-top: 70px;
-  padding-bottom: 200px;
-}
-
 table {
   table-layout: fixed;
 }

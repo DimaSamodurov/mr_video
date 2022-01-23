@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= MrVideo::NAME %><%= ' | ' + yield(:title) if content_for?(:title) %></title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= MrVideo::NAME %><%= ' | ' + yield(:title) if content_for?(:title) %></title>
 
-    <%= stylesheet_link_tag 'mr_video/application', media: 'all' %>
-    <%= javascript_include_tag 'mr_video/application' %>
+  <%= stylesheet_link_tag 'mr_video/application', media: 'all' %>
+  <%= javascript_include_tag 'mr_video/application' %>
 
-    <%= yield :head %>
+  <%= yield :head %>
 
-    <%= csrf_meta_tags %>
-  </head>
-  <body>
-    <%= render partial: 'layouts/top_navbar' %>
-    <%= render partial: 'layouts/breadcrumbs' %>
-    <%= render partial: 'layouts/flashes', flash: flash %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%#= render partial: 'layouts/top_navbar' %>
+<div class="container-fluid" style="min-height: 4rem; padding: 0;">
+  <%= render partial: 'layouts/breadcrumbs' %>
+  <%= render partial: 'layouts/flashes', flash: flash %>
+</div>
+<div class="container-fluid" style="height: calc(100% - 4rem);">
+  <%= yield %>
+</div>
 
-    <div class="container-fluid" style="height: 100%;">
-      <%= yield %>
-    </div>
+<%#= render partial: 'layouts/footer' %>
 
-    <%= render partial: 'layouts/footer' %>
-
-    <%= yield :scripts %>
-  </body>
+<%= yield :scripts %>
+</body>
 </html>
